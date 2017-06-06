@@ -1,0 +1,137 @@
+<script type="text/javascript">
+
+Homey.setTitle( __('pair.title') );
+
+Homey.on('error', function( errortype, callback ) {
+
+    if (errortype == 'error') {
+		Homey.alert(__('pair.error'), 'error');
+        $('.sonarr-err-msg').show();
+		$('.sonarr-err').html( __('pair.error') );
+	}
+	if (errortype == 'nosettings') {
+		Homey.alert(__('pair.nosettings'), 'error');
+        $('.sonarr-err-msg').show();
+		$('.sonarr-err').html( __('pair.nosettings') );
+	}
+
+});
+
+Homey.on('continue', function( success, callback ) {
+	Homey.showView('list_devices');
+});
+
+$(function() {
+    $('#test-connection').click(function(){
+
+		var inputaddress = $('#address').val();
+		var inputport = Number($('#port').val());
+        var inputapikey = $('#apikey').val();
+
+        if( inputaddress != '' && inputapikey != '') {
+            var device_data = {
+                address: inputaddress,
+                port: inputport,
+                apikey: inputapikey
+            };
+
+            Homey.emit( 'test-connection', device_data, function( err, result ) {
+                if(err) {
+                    $('.sonarr-error').show();
+                    $('.sonarr-error-msg').html( err );
+                } else {
+                    $('.sonarr-test').show();
+                    $('#connect').prop('disabled', false);
+                }
+            });
+
+        } else {
+            $('.sonarr-error').show();
+            $('.sonarr-error-msg').html( __('pair.nosettings') );
+        }
+
+	});
+
+	$('#connect').click(function(){
+
+		var inputaddress = $('#address').val();
+        var inputport = Number($('#port').val());
+		var inputapikey = $('#apikey').val();
+
+        if( inputaddress != '' && inputapikey != '') {
+            var device_data = {
+                id: inputapikey,
+                address: inputaddress,
+                port: inputport,
+                apikey: inputapikey
+            };
+            var settings = {
+                address: inputaddress,
+                port: inputport,
+                apikey: inputapikey
+            };
+
+            Homey.addDevice({
+                name  	 : 'Sonarr',
+                data 	 : device_data,
+                settings : settings
+            }, function( err, result ) {
+                if ( err ) {
+                    $('.sonarr-test').hide();
+                    $('.sonarr-error').show();
+                    $('.sonarr-error-msg').html( err.message || err.toString() );
+                }
+                $('.sonarr-test').hide();
+                $('.sonarr-ok').show();
+                Homey.emit('add_device', device_data, function( err, result ){
+					if( err ) return Homey.alert(err.message || err.toString());
+					return Homey.done();
+				})
+            })
+
+        } else {
+            $('.sonarr-test').hide();
+            $('.sonarr-error').show();
+            $('.sonarr-error-msg').html( __('pair.nosettings') );
+        }
+
+	});
+})
+</script>
+
+<style type="text/css">
+	.sonarr-status {
+		display: none;
+	}
+    .form-group input[type="text"] {
+        width: 80% !important;
+    }
+    .buttons, .messages {
+        padding-top: 14px;
+    }
+</style>
+
+<p data-i18n="pair.intro">Enter the details of Sonarr.</p>
+
+<div class="form-group">
+    <label for="address" data-i18n="pair.address">IP address</label>
+    <input type="text" class="form-control" id="address" placeholder="192.168.0.100">
+</div>
+<div class="form-group">
+	<label for="port" data-i18n="pair.port">Port</label>
+	<input type="number" class="form-control" id="port" placeholder="8989">
+</div>
+<div class="form-group">
+	<label for="apikey" data-i18n="pair.apikey">API Key</label>
+	<input type="text" class="form-control" id="apikey">
+</div>
+<div class="form-group buttons">
+    <button id="test-connection" class="button" data-i18n="pair.test">Test Connection</button>
+    <button id="connect" class="button" data-i18n="pair.connect" disabled>Connect</button>
+</div>
+
+<div class="messages">
+    <p class="sonarr-status sonarr-test" style="color: #008C23;"><i class="fa fa-check"></i> <span data-i18n="pair.testing">Connection test successfull, you can now connect Sonarr.</span></p>
+    <p class="sonarr-status sonarr-ok" style="color: #008C23;"><i class="fa fa-check"></i> <span data-i18n="pair.success">Sonarr added succesfully.</span></p>
+    <p class="sonarr-status sonarr-error" style="color: #ff6300;"><i class="fa fa-times"></i> <span class="sonarr-error-msg"></span></p>
+</div>

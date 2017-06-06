@@ -1,0 +1,14 @@
+{
+    "pair": {
+		"title": "Add Sonarr/Radarr",
+        "nosettings": "Please fill in all the fields.",
+        "intro": "Enter the details of your Sonarr/Radarr device.",
+        "address": "IP Address",
+        "port": "Port",
+        "apikey": "API Key",
+        "success": "Sonarr/Radarr added succesfully.",
+        "test" : "Test Connection",
+        "testing" : "Connection test successfull, you can now connect Sonarr/Radarr.",
+        "connect": "Connect"
+	}
+}

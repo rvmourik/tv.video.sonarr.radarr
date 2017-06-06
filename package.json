@@ -1,0 +1,30 @@
+{
+  "name": "tv.video.sonarr.radarr",
+  "version": "1.0.0",
+  "description": "Sonarr and Radarr app for Homey",
+  "main": "app.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jghaanstra/tv.video.sonarr.radarr.git"
+  },
+  "keywords": [
+    "xiaomi",
+    "homey",
+    "mi",
+    "home",
+    "vacuum",
+    "robot"
+  ],
+  "author": "Jelger Haanstra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jghaanstra/tv.video.sonarr.radarr/issues"
+  },
+  "homepage": "https://github.com/jghaanstra/tv.video.sonarr.radarr#readme"
+}

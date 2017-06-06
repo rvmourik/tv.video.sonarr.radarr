@@ -1,0 +1,14 @@
+{
+    "pair": {
+		"title": "Sonarr/Radarr toevoegen",
+        "nosettings": "Vul a.u.b. alle velden in.",
+        "intro": "Vul de details van Sonarr/Radarr in.",
+        "address": "IP adres",
+        "port": "Poort",
+        "apikey": "API Key",
+        "success": "Sonarr/Radarr succesvol toegevoegd.",
+        "test" : "Test verbinding",
+        "testing" : "Connectie test succesvol, je kan Sonarr/Radarr nu verbinden.",
+        "connect": "Verbind"
+	}
+}

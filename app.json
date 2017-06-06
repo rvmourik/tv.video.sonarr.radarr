@@ -1,0 +1,353 @@
+{
+	"id": "tv.video.sonarr.radarr",
+	"name": {
+		"en": "Sonarr and Radarr",
+		"nl": "Sonarr and Radarr"
+    },
+    "tags": {
+		"en": [ "Sonarr", "Radarr", "tv shows", "movies", "download" ],
+		"nl": [ "Sonarr", "Radarr", "tv series", "films", "download" ]
+	},
+	"version": "1.0.0",
+	"compatibility": "0.x || 1.x",
+	"author": {
+		"name": "Jelger Haanstra",
+		"email": "homey@solidewebservices.com"
+	},
+    "images": {
+        "large": "./assets/images/large.jpg",
+        "small": "./assets/images/small.jpg"
+    },
+	"category": "internet",
+	"description": {
+		"en": "Control Sonarr and Radarr download software",
+		"nl": "Bestuur Sonarr en Radarr download software"
+	},
+	"dependencies": {
+		"net": "*"
+	},
+	"drivers": [
+        {
+			"id": "sonarr",
+			"name": {
+				"en": "Sonarr",
+				"nl": "Sonarr"
+			},
+			"images": {
+				"large": "drivers/sonarr/assets/images/large.jpg",
+				"small": "drivers/sonarr/assets/images/small.jpg"
+			},
+			"class": "other",
+            "capabilities": [
+            ],
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+			"settings": [
+			    {
+                    "type": "group",
+                    "label": {
+                        "en": "Sonarr Settings",
+						"nl": "Sonarr Instellingen"
+                    },
+					"children": [
+				        {
+				            "id": "address",
+				            "type": "text",
+				            "value": "0.0.0.0",
+				            "label": {
+				                "en": "IP Address",
+				                "nl": "IP Adres"
+				            }
+				        },
+                        {
+				            "id": "port",
+				            "type": "number",
+				            "value": 8989,
+                            "min": 0,
+			                "max": 65535,
+			                "step": 1,
+				            "label": {
+				                "en": "Port",
+				                "nl": "Poort"
+				            }
+				        },
+				        {
+					        "id": "apikey",
+					        "type": "text",
+					        "value": "",
+					        "label": {
+						        "en": "Sonarr Api Key",
+						        "nl": "Sonarr Api Key"
+					        }
+				        }
+		            ]
+		        }
+		    ]
+		},
+        {
+			"id": "radarr",
+			"name": {
+				"en": "Radarr",
+				"nl": "Radarr"
+			},
+			"images": {
+				"large": "drivers/radarr/assets/images/large.jpg",
+				"small": "drivers/radarr/assets/images/small.jpg"
+			},
+			"class": "other",
+            "capabilities": [
+            ],
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+			"settings": [
+			    {
+                    "type": "group",
+                    "label": {
+                        "en": "Radarr Settings",
+						"nl": "Radarr Instellingen"
+                    },
+					"children": [
+				        {
+				            "id": "address",
+				            "type": "text",
+				            "value": "0.0.0.0",
+				            "label": {
+				                "en": "IP Address",
+				                "nl": "IP Adres"
+				            }
+				        },
+                        {
+				            "id": "port",
+				            "type": "number",
+				            "value": 8310,
+                            "min": 0,
+                            "max": 65535,
+                            "step": 1,
+				            "label": {
+				                "en": "Port",
+				                "nl": "Poort"
+				            }
+				        },
+				        {
+					        "id": "apikey",
+					        "type": "text",
+					        "value": "",
+					        "label": {
+						        "en": "Radarr Api Key",
+						        "nl": "Radarr Api Key"
+					        }
+				        }
+		            ]
+		        }
+		    ]
+		}
+	],
+    "flow": {
+		"triggers": [
+			{
+				"id": "grab_episode",
+				"title": {
+					"en": "Episode started downloading",
+					"nl": "Episode gestart downloaden"
+				},
+				"hint": {
+					"en": "Trigger a flow when an episode has started downloading.",
+					"nl": "Trigger een flow wanneer een episode is gestart met downloaden."
+				},
+                "tokens": [
+                    {
+                        "name": "title",
+                        "type": "string",
+                        "title": {
+                            "en": "title",
+                            "nl": "titel"
+                        },
+                        "example": {
+                            "en": "...And the Bag's in the River",
+                            "nl": "...And the Bag's in the River"
+                        }
+                    },
+                    {
+                        "name": "episode",
+                        "type": "number",
+                        "title": {
+                            "en": "episode",
+                            "nl": "episode"
+                        },
+                        "example": 3
+                    },
+                    {
+                        "name": "season",
+                        "type": "number",
+                        "title": {
+                            "en": "season",
+                            "nl": "seizoen"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "serie",
+                        "type": "string",
+                        "title": {
+                            "en": "serie",
+                            "nl": "serie"
+                        },
+                        "example": "Breaking Bad"
+                    }
+                ],
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "download_episode",
+				"title": {
+					"en": "Episode downloaded",
+					"nl": "Episode gedownload"
+				},
+				"hint": {
+					"en": "Trigger a flow when an episode has finished downloading.",
+					"nl": "Trigger een flow wanneer een episode is gedownload."
+				},
+                "tokens": [
+                    {
+                        "name": "title",
+                        "type": "string",
+                        "title": {
+                            "en": "title",
+                            "nl": "titel"
+                        },
+                        "example": {
+                            "en": "...And the Bag's in the River",
+                            "nl": "...And the Bag's in the River"
+                        }
+                    },
+                    {
+                        "name": "episode",
+                        "type": "number",
+                        "title": {
+                            "en": "episode",
+                            "nl": "episode"
+                        },
+                        "example": 3
+                    },
+                    {
+                        "name": "season",
+                        "type": "number",
+                        "title": {
+                            "en": "season",
+                            "nl": "seizoen"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "serie",
+                        "type": "string",
+                        "title": {
+                            "en": "serie",
+                            "nl": "serie"
+                        },
+                        "example": "Breaking Bad"
+                    }
+                ],
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "grab_movie",
+				"title": {
+					"en": "Movie download started",
+					"nl": "Film download gestart"
+				},
+				"hint": {
+					"en": "Trigger a flow when an movie has started downloading.",
+					"nl": "Trigger een flow wanneer een film is gestart met downloaden."
+				},
+                "tokens": [
+                    {
+                        "name": "title",
+                        "type": "string",
+                        "title": {
+                            "en": "title",
+                            "nl": "titel"
+                        },
+                        "example": {
+                            "en": "Fight Club",
+                            "nl": "Fight Club"
+                        }
+                    }
+                ],
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Radarr",
+							"nl": "Selecteer Radarr"
+						},
+						"filter": "driver_id=radarr"
+					}
+				]
+			},
+            {
+				"id": "download_movie",
+				"title": {
+					"en": "Movie downloaded",
+					"nl": "Film gedownload"
+				},
+				"hint": {
+					"en": "Trigger a flow when an movie has finished downloading.",
+					"nl": "Trigger een flow wanneer een film is gedownload."
+				},
+                "tokens": [
+                    {
+                        "name": "title",
+                        "type": "string",
+                        "title": {
+                            "en": "title",
+                            "nl": "titel"
+                        },
+                        "example": {
+                            "en": "Fight Club",
+                            "nl": "Fight Club"
+                        }
+                    }
+                ],
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Radarr",
+							"nl": "Selecteer Radarr"
+						},
+						"filter": "driver_id=radarr"
+					}
+				]
+			}
+		]
+    }
+}
