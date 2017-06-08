@@ -12,8 +12,8 @@ For Homey to be able to receive updates from Sonarr and Radarr these application
     * On Upgrade: No
     * On Rename: No
     * Filter Series Tags: Empty
-    * URL for Sonarr: <<http(s)://yourip-or-homey-url>>/api/app/tv.video.sonarr.radarr/sonarr/ where you add the local IP of Homey (if on the same network as Sonarr) or the external cloud URL of Homey
-    * URL for Radarr: <<http(s)://yourip-or-homey-url>>/api/app/tv.video.sonarr.radarr/radarr/ where you add the local IP of Homey (if on the same network as Radarr) or the external cloud URL of Homey
+    * URL for Sonarr: http(s)://yourip-or-homey-url/api/app/tv.video.sonarr.radarr/sonarr/ where you add the local IP of Homey (if on the same network as Sonarr) or the external cloud URL of Homey
+    * URL for Radarr: http(s)://yourip-or-homey-url/api/app/tv.video.sonarr.radarr/radarr/ where you add the local IP of Homey (if on the same network as Radarr) or the external cloud URL of Homey
     * Method: POST
 
 ## Supported Cards
