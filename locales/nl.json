@@ -10,5 +10,13 @@
         "test" : "Test verbinding",
         "testing" : "Connectie test succesvol, je kan Sonarr/Radarr nu verbinden.",
         "connect": "Verbind"
-	}
+	},
+    "Future episode are": "Toekomstige afleveringen zijn",
+    "Future movies are": "Toekomstige films zijn",
+    ", season episode titled with airdate": ", __serie__ seizoen __season__ aflevering __episode__ getiteld __title__ met uitzenddatum __airdate__",
+    ", in cinemas on and released on": ", __title__ in de bioscoop op __cinema__ en uitgebracht op __release__",
+    "No episodes found": "Geen afleveringen gevonden",
+    "No movies found": "Geen films gevonden",
+    "Current downloads are": "Huidige downloads zijn",
+    "No current downloads": "Geen huidige downloads"
 }

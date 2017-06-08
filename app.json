@@ -26,6 +26,10 @@
 	"dependencies": {
 		"net": "*"
 	},
+    "permissions": [
+        "homey:manager:speech-input",
+        "homey:manager:speech-output"
+    ],
 	"drivers": [
         {
 			"id": "sonarr",
@@ -348,6 +352,138 @@
 					}
 				]
 			}
-		]
+		],
+        "actions": [
+            {
+				"id": "sonarr_calendar",
+				"title": {
+					"en": "Say future episodes",
+					"nl": "Zeg toekomstige afleveringen"
+				},
+				"hint": {
+                    "en": "Let Homey speak the upcoming episodes from the Sonarr calendar within the set number of weeks.",
+					"nl": "Laat Homey het aantal toekomstige films van de Sonarr kalender spreken binnen de aangegeven weken."
+				},
+                "args": [
+                    {
+                        "name": "range",
+                        "type": "number",
+                        "min": 1,
+                        "max": 12,
+                        "placeholder": {
+							"en": "within weeks",
+							"nl": "binnen weken"
+						}
+                    },
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "radarr_calendar",
+				"title": {
+					"en": "Say future movies",
+					"nl": "Zeg toekomstige films"
+				},
+				"hint": {
+                    "en": "Let Homey speak the upcoming movies from the Radarr calendar within the set number of weeks.",
+					"nl": "Laat Homey het aantal toekomstige films van de Radarr kalender spreken binnen de aangegeven weken."
+				},
+                "args": [
+                    {
+                        "name": "range",
+                        "type": "number",
+                        "min": 1,
+                        "max": 12,
+                        "placeholder": {
+							"en": "within weeks",
+							"nl": "binnen weken"
+						}
+                    },
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Radarr",
+							"nl": "Selecteer Radarr"
+						},
+						"filter": "driver_id=radarr"
+					}
+				]
+			},
+            {
+				"id": "sonarr_queue",
+				"title": {
+					"en": "What's currently downloading",
+					"nl": "Wat is aan het downloaden"
+				},
+				"hint": {
+                    "en": "Let Homey speak the currently downloading episodes.",
+					"nl": "Laat Homey de afleveringen vertellen die momenteel aan het downloaden zijn."
+				},
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "sonarr_refresh",
+				"title": {
+					"en": "Refresh and rescan",
+					"nl": "Ververs en scan"
+				},
+				"hint": {
+                    "en": "Refresh series information from trakt and rescan disks.",
+					"nl": "Ververs serie informatie vanaf trakt en scan disks opnieuw."
+				},
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "radarr_refresh",
+				"title": {
+					"en": "Refresh and rescan",
+					"nl": "Ververs en scan"
+				},
+				"hint": {
+                    "en": "Refresh movies information from TMDb and rescan disks.",
+					"nl": "Ververs films informatie vanaf TMDb en scan disks opnieuw."
+				},
+                "args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Radarr",
+							"nl": "Selecteer Radarr"
+						},
+						"filter": "driver_id=radarr"
+					}
+				]
+			}
+        ]
     }
 }

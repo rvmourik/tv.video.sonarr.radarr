@@ -63,3 +63,42 @@ function initDevice(device_data) {
         })
     })
 }
+
+// FLOW ACTION HANDLERS
+Homey.manager('flow').on('action.radarr_calendar', function( callback, args ) {
+    utils.calendar(args, function( err, result ) {
+        if(err) {
+            callback(err, false);
+        } else {
+            var movies = JSON.parse(result);
+            if (movies.length > 0) {
+                Homey.manager('speech-output').say(__("Future movies are"));
+
+                movies.forEach( function(movie) {
+                    var title = movie.title;
+                    var cinemadate = movie.inCinemas;
+                    var cinemadate = cinemadate.substring(0,10);
+                    var releasedate = movie.physicalRelease;
+                    var releasedate = releasedate.substring(0,10);
+
+                    Homey.manager('speech-output').say(__(", in cinemas on and released on", { "title": title, "cinema": cinemadate, "release": releasedate }));
+                });
+            } else {
+                Homey.manager('speech-output').say(__("No movies found"));
+            }
+            callback(null, true);
+        }
+    });
+});
+
+Homey.manager('flow').on('action.radarr_refresh', function( callback, args ) {
+    var commands = '{"name": "RefreshMovie"}';
+
+    utils.command(args, commands, function( err, result ) {
+        if(err) {
+            callback(err, false);
+        } else {
+            callback(null, true);
+        }
+    });
+});

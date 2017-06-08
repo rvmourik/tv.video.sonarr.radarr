@@ -63,3 +63,68 @@ function initDevice(device_data) {
         })
     })
 }
+
+// FLOW ACTION HANDLERS
+Homey.manager('flow').on('action.sonarr_calendar', function( callback, args ) {
+    utils.calendar(args, function( err, result ) {
+        if(err) {
+            callback(err, false);
+        } else {
+            var episodes = JSON.parse(result);
+            if (episodes.length > 0) {
+                Homey.manager('speech-output').say(__("Future episode are"));
+
+                episodes.forEach( function(episode) {
+                    var serie = episode.series.title;
+                    var season = episode.seasonNumber;
+                    var episodenumber = episode.episodeNumber;
+                    var title = episode.title;
+                    var airdate = episode.airDate;
+
+                    Homey.manager('speech-output').say(__(", season episode titled with airdate", { "serie": serie, "season": season, "episode": episodenumber, "title": title, "airdate": airdate }));
+                });
+            } else {
+                Homey.manager('speech-output').say(__("No episodes found"));
+            }
+            callback(null, true);
+        }
+    });
+});
+
+Homey.manager('flow').on('action.sonarr_queue', function( callback, args ) {
+    utils.queue(args, function( err, result ) {
+        if(err) {
+            callback(err, false);
+        } else {
+            var downloads = JSON.parse(result);
+            if (downloads.length > 0) {
+                Homey.manager('speech-output').say(__("Current downloads are"));
+
+                downloads.forEach( function(download) {
+                    var serie = download.series.title;
+                    var season = download.episode.seasonNumber;
+                    var episodenumber = download.episode.episodeNumber;
+                    var title = download.episode.title;
+                    var airdate = download.episode.airDate;
+
+                    Homey.manager('speech-output').say(__(", season episode titled with airdate", { "serie": serie, "season": season, "episode": episodenumber, "title": title, "airdate": airdate }));
+                });
+            } else {
+                Homey.manager('speech-output').say(__("No current downloads"));
+            }
+            callback(null, true);
+        }
+    });
+});
+
+Homey.manager('flow').on('action.sonarr_refresh', function( callback, args ) {
+    var commands = '{"name": "RefreshSeries"}';
+
+    utils.command(args, commands, function( err, result ) {
+        if(err) {
+            callback(err, false);
+        } else {
+            callback(null, true);
+        }
+    });
+});
