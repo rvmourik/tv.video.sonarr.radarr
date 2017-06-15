@@ -40,6 +40,8 @@ $(function() {
                     $('.sonarr-error').show();
                     $('.sonarr-error-msg').html( err );
                 } else {
+                    var data = JSON.parse(result);
+                    $('#rootfolder').val(data[0].path);
                     $('.sonarr-test').show();
                     $('#connect').prop('disabled', false);
                 }
@@ -57,18 +59,21 @@ $(function() {
 		var inputaddress = $('#address').val();
         var inputport = Number($('#port').val());
 		var inputapikey = $('#apikey').val();
+        var inputrootfolder = $('#rootfolder').val();
 
         if( inputaddress != '' && inputapikey != '') {
             var device_data = {
                 id: inputapikey,
                 address: inputaddress,
                 port: inputport,
-                apikey: inputapikey
+                apikey: inputapikey,
+                rootfolder: inputrootfolder
             };
             var settings = {
                 address: inputaddress,
                 port: inputport,
-                apikey: inputapikey
+                apikey: inputapikey,
+                rootfolder: inputrootfolder
             };
 
             Homey.addDevice({
@@ -125,6 +130,7 @@ $(function() {
 	<label for="apikey" data-i18n="pair.apikey">API Key</label>
 	<input type="text" class="form-control" id="apikey">
 </div>
+<input type="hidden" id="rootfolder" value="">
 <div class="form-group buttons">
     <button id="test-connection" class="button" data-i18n="pair.test">Test Connection</button>
     <button id="connect" class="button" data-i18n="pair.connect" disabled>Connect</button>

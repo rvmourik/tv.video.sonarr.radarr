@@ -8,7 +8,7 @@
 		"en": [ "Sonarr", "Radarr", "tv shows", "movies", "download" ],
 		"nl": [ "Sonarr", "Radarr", "tv series", "films", "download" ]
 	},
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"compatibility": "0.x || 1.x",
 	"author": {
 		"name": "Jelger Haanstra",
@@ -362,7 +362,7 @@
 				},
 				"hint": {
                     "en": "Let Homey speak the upcoming episodes from the Sonarr calendar within the set number of weeks.",
-					"nl": "Laat Homey het aantal toekomstige films van de Sonarr kalender spreken binnen de aangegeven weken."
+					"nl": "Laat Homey het aantal toekomstige afleveringen van de Sonarr kalender spreken binnen de aangegeven weken."
 				},
                 "args": [
                     {
@@ -481,6 +481,36 @@
 							"nl": "Selecteer Radarr"
 						},
 						"filter": "driver_id=radarr"
+					}
+				]
+			},
+            {
+				"id": "sonarr_add",
+				"title": {
+					"en": "Ask what series to add",
+					"nl": "Vraag welke serie toe te voegen"
+				},
+				"hint": {
+                    "en": "Let Homey ask which series you want Sonarr to start monitoring.",
+					"nl": "Laat Homey vragen welke serie Sonarr moet starten te monitoren."
+				},
+                "args": [
+                    {
+                        "name": "quality",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "Quality Profile",
+                            "nl": "Kwaliteitsprofiel"
+                        }
+                    },
+                    {
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
 					}
 				]
 			}
