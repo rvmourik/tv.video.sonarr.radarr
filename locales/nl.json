@@ -21,7 +21,9 @@
     "No current downloads": "Geen huidige downloads",
     "Something went wrong": "Er is iets mis gegaan",
     "What series do you want to add?": "Welke serie wil je toevoegen?",
-    "Unable to find series, please try again.": "Het is niet gelukt de serie te vinden, probeer het nog eens.",
+    "What movie do you want to add?": "Welke film wil je toevoegen?",
     "The following series has been added": "De volgende serie is toegevoegd",
-    "Series not found, please try again": "Serie niet gevonden, probeer het nog eens."
+    "The following movie has been added": "De volgende film is toegevoegd",
+    "Series not found, please try again": "Serie niet gevonden, probeer het nog eens",
+    "Movie not found, please try again": "Film niet gevonden, probeer het nog eens"
 }

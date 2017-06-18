@@ -355,6 +355,66 @@
 		],
         "actions": [
             {
+				"id": "sonarr_add",
+				"title": {
+					"en": "Ask what series to add",
+					"nl": "Vraag welke serie toe te voegen"
+				},
+				"hint": {
+                    "en": "Let Homey ask which series you want Sonarr to start monitoring.",
+					"nl": "Laat Homey vragen welke serie Sonarr moet starten te monitoren."
+				},
+                "args": [
+                    {
+                        "name": "quality",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "Quality Profile",
+                            "nl": "Kwaliteitsprofiel"
+                        }
+                    },
+                    {
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Sonarr",
+							"nl": "Selecteer Sonarr"
+						},
+						"filter": "driver_id=sonarr"
+					}
+				]
+			},
+            {
+				"id": "radarr_add",
+				"title": {
+					"en": "Ask what movie to add",
+					"nl": "Vraag welke film toe te voegen"
+				},
+				"hint": {
+                    "en": "Let Homey ask which movie you want Radarr to start monitoring.",
+					"nl": "Laat Homey vragen welke film Radarr moet starten te monitoren."
+				},
+                "args": [
+                    {
+                        "name": "quality",
+                        "type": "autocomplete",
+                        "placeholder": {
+                            "en": "Quality Profile",
+                            "nl": "Kwaliteitsprofiel"
+                        }
+                    },
+                    {
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Select Radarr",
+							"nl": "Selecteer Radarr"
+						},
+						"filter": "driver_id=radarr"
+					}
+				]
+			},
+            {
 				"id": "sonarr_calendar",
 				"title": {
 					"en": "Say future episodes",
@@ -481,36 +541,6 @@
 							"nl": "Selecteer Radarr"
 						},
 						"filter": "driver_id=radarr"
-					}
-				]
-			},
-            {
-				"id": "sonarr_add",
-				"title": {
-					"en": "Ask what series to add",
-					"nl": "Vraag welke serie toe te voegen"
-				},
-				"hint": {
-                    "en": "Let Homey ask which series you want Sonarr to start monitoring.",
-					"nl": "Laat Homey vragen welke serie Sonarr moet starten te monitoren."
-				},
-                "args": [
-                    {
-                        "name": "quality",
-                        "type": "autocomplete",
-                        "placeholder": {
-                            "en": "Quality Profile",
-                            "nl": "Kwaliteitsprofiel"
-                        }
-                    },
-                    {
-						"name": "device",
-						"type": "device",
-						"placeholder": {
-							"en": "Select Sonarr",
-							"nl": "Selecteer Sonarr"
-						},
-						"filter": "driver_id=sonarr"
 					}
 				]
 			}

@@ -21,7 +21,9 @@
     "No current downloads": "No current downloads",
     "Something went wrong": "Something went wrong",
     "What series do you want to add?": "What series do you want to add?",
-    "Unable to find series, please try again.": "Unable to find series, please try again.",
+    "What movie do you want to add?": "What movie do you want to add?",
     "The following series has been added": "The following series has been added",
-    "Series not found, please try again": "Series not found, please try again"
+    "The following movie has been added": "The following movie has been added",
+    "Series not found, please try again": "Series not found, please try again",
+    "Movie not found, please try again": "Movie not found, please try again"  
 }

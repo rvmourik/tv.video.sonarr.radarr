@@ -10,19 +10,24 @@ var self = {
             initDevice(device_data);
     	});
         Homey.log('Driver Radarr initialized ...');
-    	callback (null, true);
+    	callback();
     },
     pair: function (socket) {
         socket.on('disconnect', function() {
             Homey.log ("User aborted pairing, or pairing is finished");
         });
 
-        socket.on('test-connection', function( data, callback ) {
-            //TODO: make connection test
-            callback(null, "test succesfully");
+        socket.on('test-connection', function(data, callback ) {
+            utils.rootFolder(data, function(error, result) {
+                if(error) {
+                    callback(error, null);
+                } else {
+                    callback(null, result);
+                }
+            });
         });
 
-        socket.on('add_device', function( device_data, callback ){
+        socket.on('add_device', function(device_data, callback) {
             initDevice( device_data );
             callback( null, true );
         });
@@ -59,13 +64,35 @@ function initDevice(device_data) {
                     id: device_data.id,
                     address: settings.address,
                     port: settings.port,
-                    apikey: settings.apikey
+                    apikey: settings.apikey,
+                    rootfolder: settings.rootfolder
                 }
             }
             radarrs[device_data.id].settings = settings;
         })
     })
 }
+
+Homey.manager('flow').on('action.radarr_add.quality.autocomplete', function(callback, args) {
+    var qualityProfiles = [];
+    utils.qualityProfile(args.args, function(error, result) {
+        if(error) {
+            callback(error, null);
+        } else {
+            var profiles = JSON.parse(result);
+            if (profiles.length > 0) {
+                profiles.forEach( function(profile) {
+                    var qualityProfile = {};
+                    qualityProfile.icon = '/app/tv.video.sonarr.radarr/drivers/radarr/assets/download.svg';
+                    qualityProfile.name = profile.name;
+                    qualityProfile.id = profile.cutoff.id;
+                    qualityProfiles.push(qualityProfile);
+                });
+            }
+            callback(null, qualityProfiles);
+        }
+    });
+});
 
 // FLOW ACTION HANDLERS
 Homey.manager('flow').on('action.radarr_calendar', function( callback, args ) {
@@ -94,12 +121,21 @@ Homey.manager('flow').on('action.radarr_calendar', function( callback, args ) {
     });
 });
 
-Homey.manager('flow').on('action.radarr_refresh', function( callback, args ) {
+Homey.manager('flow').on('action.radarr_refresh', function(callback, args) {
     var commands = '{"name": "RefreshMovie"}';
-
     utils.command(args, commands, function( err, result ) {
         if(err) {
             callback(err, false);
+        } else {
+            callback(null, true);
+        }
+    });
+});
+
+Homey.manager('flow').on('action.radarr_add', function(callback, args) {
+    utils.addMedia(args, 'movie', function(error, result) {
+        if(error) {
+            callback(error, false);
         } else {
             callback(null, true);
         }

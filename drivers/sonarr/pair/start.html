@@ -28,17 +28,17 @@ $(function() {
 		var inputport = Number($('#port').val());
         var inputapikey = $('#apikey').val();
 
-        if( inputaddress != '' && inputapikey != '') {
+        if( inputaddress != '' && inputport != '' && inputapikey != '') {
             var device_data = {
                 address: inputaddress,
                 port: inputport,
                 apikey: inputapikey
             };
 
-            Homey.emit( 'test-connection', device_data, function( err, result ) {
-                if(err) {
+            Homey.emit( 'test-connection', device_data, function(error, result) {
+                if(error) {
                     $('.sonarr-error').show();
-                    $('.sonarr-error-msg').html( err );
+                    $('.sonarr-error-msg').html(error);
                 } else {
                     var data = JSON.parse(result);
                     $('#rootfolder').val(data[0].path);
@@ -46,12 +46,10 @@ $(function() {
                     $('#connect').prop('disabled', false);
                 }
             });
-
         } else {
             $('.sonarr-error').show();
             $('.sonarr-error-msg').html( __('pair.nosettings') );
         }
-
 	});
 
 	$('#connect').click(function(){
@@ -61,7 +59,7 @@ $(function() {
 		var inputapikey = $('#apikey').val();
         var inputrootfolder = $('#rootfolder').val();
 
-        if( inputaddress != '' && inputapikey != '') {
+        if( inputaddress != '' && inputport != '' && inputapikey != '') {
             var device_data = {
                 id: inputapikey,
                 address: inputaddress,

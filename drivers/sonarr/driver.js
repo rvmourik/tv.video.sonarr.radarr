@@ -10,7 +10,7 @@ var self = {
             initDevice(device_data);
     	});
         Homey.log('Driver Sonarr initialized ...');
-    	callback (null, true);
+    	callback();
     },
     pair: function (socket) {
         socket.on('disconnect', function() {
@@ -27,7 +27,7 @@ var self = {
             });
         });
 
-        socket.on('add_device', function( device_data, callback ){
+        socket.on('add_device', function(device_data, callback) {
             initDevice( device_data );
             callback( null, true );
         });
@@ -147,9 +147,8 @@ Homey.manager('flow').on('action.sonarr_queue', function( callback, args ) {
     });
 });
 
-Homey.manager('flow').on('action.sonarr_refresh', function( callback, args ) {
+Homey.manager('flow').on('action.sonarr_refresh', function(callback, args) {
     var commands = '{"name": "RefreshSeries"}';
-
     utils.command(args, commands, function( err, result ) {
         if(err) {
             callback(err, false);
@@ -159,8 +158,8 @@ Homey.manager('flow').on('action.sonarr_refresh', function( callback, args ) {
     });
 });
 
-Homey.manager('flow').on('action.sonarr_add', function( callback, args ) {
-    utils.askAndAddSeries(args, function(error, result) {
+Homey.manager('flow').on('action.sonarr_add', function(callback, args) {
+    utils.addMedia(args, 'series', function(error, result) {
         if(error) {
             callback(error, false);
         } else {
