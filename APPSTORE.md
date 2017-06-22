@@ -28,7 +28,7 @@ For Homey to be able to receive updates from Sonarr and Radarr these application
 ### Radarr
 * [TRIGGER] Episode grabbed (tokens for serie, season, episode and title)
 * [TRIGGER] Episode downloaded (tokens for serie, season, episode and title)
-* [ACTION] Add moviess to the Radarr library through voice and with a selected quality profile.
+* [ACTION] Add movies to the Radarr library through voice and with a selected quality profile.
 * [ACTION] Let Homey speak upcoming movies from the Radarr calendar within the selected weeks
 * [ACTION] Refresh movies information from TMDb and rescan disks.
 
@@ -37,11 +37,15 @@ Donating is completely optional.
 [![Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png)](https://paypal.me/jghaanstra)
 
 ## Changelog
+### 2017-06-22 -- v1.1.1
+* IMPROVEMENTS: added leading zero to season and episode number tokens for Sonarr trigger cards
+* FIX: fixed an error which causes the app to crash in the speech handling part of the add cards for Sonarr and Radarr
+
 ### 2017-06-18 -- v1.1.0
 IMPORTANT: this release requires you to re-pair your Sonarr and Radarr installation.
-* Added check in API if incoming IP matches IP of Sonarr or Radarr device
-* Added action cards for adding series and movies to Sonarr and Radarr through voice commands
-* Fixed a type-o in the hint of the Sonarr calendar card
+* NEW: Added action cards for adding series and movies to Sonarr and Radarr through voice commands
+* IMPROVEMENT: Added check in API if incoming IP matches IP of Sonarr or Radarr device
+* FIX: fixed a type-o in the hint of the Sonarr calendar card
 
 ### 2017-06-08 -- v1.0.0
 * Initial version

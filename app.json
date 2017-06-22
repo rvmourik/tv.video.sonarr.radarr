@@ -8,7 +8,7 @@
 		"en": [ "Sonarr", "Radarr", "tv shows", "movies", "download" ],
 		"nl": [ "Sonarr", "Radarr", "tv series", "films", "download" ]
 	},
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"compatibility": "0.x || 1.x",
 	"author": {
 		"name": "Jelger Haanstra",
@@ -179,21 +179,21 @@
                     },
                     {
                         "name": "episode",
-                        "type": "number",
+                        "type": "string",
                         "title": {
                             "en": "episode",
                             "nl": "episode"
                         },
-                        "example": 3
+                        "example": "03"
                     },
                     {
                         "name": "season",
-                        "type": "number",
+                        "type": "string",
                         "title": {
                             "en": "season",
                             "nl": "seizoen"
                         },
-                        "example": 1
+                        "example": "01"
                     },
                     {
                         "name": "serie",
@@ -242,21 +242,21 @@
                     },
                     {
                         "name": "episode",
-                        "type": "number",
+                        "type": "string",
                         "title": {
                             "en": "episode",
                             "nl": "episode"
                         },
-                        "example": 3
+                        "example": "03"
                     },
                     {
                         "name": "season",
-                        "type": "number",
+                        "type": "string",
                         "title": {
                             "en": "season",
                             "nl": "seizoen"
                         },
-                        "example": 1
+                        "example": "01"
                     },
                     {
                         "name": "serie",

@@ -20,8 +20,8 @@ module.exports = [
                         var episodes = args.body.Episodes;
 
                         episodes.forEach( function(episode) {
-                            var season = episode.SeasonNumber;
-                            var episodenumber = episode.EpisodeNumber;
+                            var season = addLeadingZero(episode.SeasonNumber);
+                            var episodenumber = addLeadingZero(episode.EpisodeNumber);
                             var title = episode.Title;
 
                             if (eventtype == 'Grab') {
@@ -29,6 +29,8 @@ module.exports = [
                                 callback(null, true);
                             } else if (eventtype == 'Download' || eventtype == 'Test') {
                                 Homey.manager('flow').triggerDevice('download_episode', {serie: serie, season: season, episode: episodenumber, title: title});
+                                Homey.log("season: "+ season);
+                                Homey.log("episode: "+ episodenumber);
                                 callback(null, true);
                             } else {
                                 Homey.log(args);
@@ -69,3 +71,12 @@ module.exports = [
 		}
 	}
 ]
+
+function addLeadingZero(str) {
+    var number = Number(str);
+    if (number < 10) {
+        return ("0" + number);
+    } else {
+        return number.toString();
+    }
+}
