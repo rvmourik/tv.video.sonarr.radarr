@@ -29,8 +29,6 @@ module.exports = [
                                 callback(null, true);
                             } else if (eventtype == 'Download' || eventtype == 'Test') {
                                 Homey.manager('flow').triggerDevice('download_episode', {serie: serie, season: season, episode: episodenumber, title: title});
-                                Homey.log("season: "+ season);
-                                Homey.log("episode: "+ episodenumber);
                                 callback(null, true);
                             } else {
                                 Homey.log(args);
