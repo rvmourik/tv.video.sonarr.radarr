@@ -3,7 +3,8 @@ Connect [Sonarr](https://github.com/Sonarr/Sonarr) and/or [Radarr](https://githu
 
 ## Instructions
 For Homey to be able to receive updates from Sonarr and Radarr these applications need to send notifications to Homey on events like finished downloads. This is achieved by registering a webhook in Sonarr and/or Radarr. Below is a short instruction on how to register this webhook.
-* Log into your Sonarr / Radarr installation and go to "Settings > Connect".
+* First add your Sonarr and/or Radarr installations as devices in Homey. You will need to fill in the IP address and API key.
+* Then log into your Sonarr / Radarr installation and go to "Settings > Connect".
 * Click on the plus button and click on the Webhook notification in the Add Notification popup
 * Enter the details as followed:
     * Name: Homey (or something similar)
@@ -37,8 +38,12 @@ Donating is completely optional.
 [![Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png)](https://paypal.me/jghaanstra)
 
 ## Changelog
+### 2017-07-06 -- v1.1.2
+* IMPROVEMENT: add better error handling when adding webhooks in Radarr and Sonarr
+* FIX: updated api.js since Sonarr changed it webhook interface with Sonarr release 2.0.0.4855
+
 ### 2017-06-22 -- v1.1.1
-* IMPROVEMENTS: added leading zero to season and episode number tokens for Sonarr trigger cards
+* IMPROVEMENT: added leading zero to season and episode number tokens for Sonarr trigger cards
 * FIX: fixed an error which causes the app to crash in the speech handling part of the add cards for Sonarr and Radarr
 
 ### 2017-06-18 -- v1.1.0

@@ -7,7 +7,7 @@ module.exports = [
 		path       : '/:source',
 		requires_authorization: false,
 		fn: function( callback, args ) {
-            var eventtype = args.body.EventType;
+            var eventtype = args.body.eventType;
         	var ipv4 = args.req.remoteAddress.match(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g)[0];
 
             if (args.params.source == 'sonarr') {
@@ -16,13 +16,13 @@ module.exports = [
                 Object.keys(sonarrs).forEach(function(key) {
             		if (sonarrs[key].data.address == ipv4) {
 
-                        var serie = args.body.Series.Title;
-                        var episodes = args.body.Episodes;
+                        var serie = args.body.series.title;
+                        var episodes = args.body.episodes;
 
                         episodes.forEach( function(episode) {
-                            var season = addLeadingZero(episode.SeasonNumber);
-                            var episodenumber = addLeadingZero(episode.EpisodeNumber);
-                            var title = episode.Title;
+                            var season = addLeadingZero(episode.seasonNumber);
+                            var episodenumber = addLeadingZero(episode.episodeNumber);
+                            var title = episode.title;
 
                             if (eventtype == 'Grab') {
                                 Homey.manager('flow').triggerDevice('grab_episode', {serie: serie, season: season, episode: episodenumber, title: title});
