@@ -38,6 +38,9 @@ Donating is completely optional.
 [![Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_92x26.png)](https://paypal.me/jghaanstra)
 
 ## Changelog
+### 2017-08-02 -- v1.1.4
+* FIX: fix for issue with the Radarr webhook (credits to rvmourik)
+
 ### 2017-07-17 -- v1.1.3
 * IMPROVEMENT: add even better error handling for the webhooks of Sonarr and Radarr
 * FIX: fix a small issue with the Radarr webhook
