@@ -54,10 +54,10 @@ module.exports = [
                             var title = args.body.Movie.Title;
                             var eventtype = args.body.EventType;
 
-                            if (eventtype = 'Grab') {
+                            if (eventtype == 'Grab') {
                                 Homey.manager('flow').triggerDevice('grab_movie', {title: title});
                                 callback(null, true);
-                            } else if (eventtype = 'Download' || eventtype == 'Test') {
+                            } else if (eventtype == 'Download' || eventtype == 'Test') {
                                 Homey.manager('flow').triggerDevice('download_movie', {title: title});
                                 callback(null, true);
                             } else {
