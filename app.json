@@ -291,18 +291,51 @@
 					"nl": "Trigger een flow wanneer een film is gestart met downloaden."
 				},
                 "tokens": [
-                    {
-                        "name": "title",
-                        "type": "string",
-                        "title": {
-                            "en": "title",
-                            "nl": "titel"
-                        },
-                        "example": {
-                            "en": "Fight Club",
-                            "nl": "Fight Club"
-                        }
-                    }
+					{
+						"name": "imdb_id",
+						"type": "string",
+						"title": {
+							"en": "IMDb Id",
+							"nl": "IMDb Id"
+						},
+						"example": {
+							"en": "tt0137523",
+							"nl": "tt0137523"
+						}
+					},
+					{
+						"name": "imdb_link",
+						"type": "string",
+						"title": {
+							"en": "link",
+							"nl": "link"
+						},
+						"example": {
+							"en": "http://www.imdb.com/title/tt0137523",
+							"nl": "http://www.imdb.com/title/tt0137523"
+						}
+					},
+					{
+						"name": "year",
+						"type": "number",
+						"title": {
+							"en": "year",
+							"nl": "jaar"
+						},
+						"example": 1999
+					},
+					{
+						"name": "title",
+						"type": "string",
+						"title": {
+							"en": "title",
+							"nl": "titel"
+						},
+						"example": {
+							"en": "Fight Club",
+							"nl": "Fight Club"
+						}
+					}
                 ],
                 "args": [
 					{
@@ -327,18 +360,69 @@
 					"nl": "Trigger een flow wanneer een film is gedownload."
 				},
                 "tokens": [
-                    {
-                        "name": "title",
-                        "type": "string",
-                        "title": {
-                            "en": "title",
-                            "nl": "titel"
-                        },
-                        "example": {
-                            "en": "Fight Club",
-                            "nl": "Fight Club"
-                        }
-                    }
+					{
+						"name": "imdb_url",
+						"type": "string",
+						"title": {
+							"en": "link",
+							"nl": "link"
+						},
+						"example": {
+							"en": "http://www.imdb.com/title/tt0137523",
+							"nl": "http://www.imdb.com/title/tt0137523"
+						}
+					},
+					{
+						"name": "image",
+						"type": "string",
+						"title": {
+							"en": "image",
+							"nl": "image"
+						},
+						"example": false
+					},
+					{
+						"name": "overview",
+						"type": "string",
+						"title": {
+							"en": "Summary",
+							"nl": "Samenvatting"
+						},
+						"example": {
+							"en": "Fight Club",
+							"nl": "Fight Club"
+						}
+					},
+					{
+						"name": "rating",
+						"type": "number",
+						"title": {
+							"en": "Rating",
+							"nl": "Beoordeling"
+						},
+						"example": 7.0
+					},
+					{
+						"name": "year",
+						"type": "number",
+						"title": {
+							"en": "year",
+							"nl": "jaar"
+						},
+						"example": 1999
+					},
+					{
+						"name": "title",
+						"type": "string",
+						"title": {
+							"en": "title",
+							"nl": "titel"
+						},
+						"example": {
+							"en": "Fight Club",
+							"nl": "Fight Club"
+						}
+					}
                 ],
                 "args": [
 					{

@@ -1,4 +1,5 @@
-var utils = require('/lib/utils.js');
+var utils = require('/lib/utils');
+const util = require('util');
 
 module.exports = [
 	{
@@ -45,25 +46,94 @@ module.exports = [
             		}
             	});
             } else if (args.params.source == 'radarr') {
-                var radarrs = Homey.manager('drivers').getDriver('radarr').getRadarrs();
+                var radarrInstances = Homey.manager('drivers').getDriver('radarr').getRadarrs();
+                var eventTriggers = {
+                    'Grab': 'grab_movie',
+                    'Download': 'download_movie',
+                    'Test': 'download_movie'
+                };
 
-                Object.keys(radarrs).forEach(function(key) {
-            		if (radarrs[key].data.address == ipv4) {
+                Object.keys(radarrInstances).forEach(function(key) {
+                    var instanceData = radarrInstances[key].data;
+
+            		if (instanceData.address == ipv4) {
 
                         if (args.body.Movie !== 'undefined') {
-                            var title = args.body.Movie.Title;
-                            var eventtype = args.body.EventType;
+                            var eventType = args.body.EventType;
 
-                            if (eventtype == 'Grab') {
-                                Homey.manager('flow').triggerDevice('grab_movie', {title: title});
-                                callback(null, true);
-                            } else if (eventtype == 'Download' || eventtype == 'Test') {
-                                Homey.manager('flow').triggerDevice('download_movie', {title: title});
-                                callback(null, true);
-                            } else {
+                            if (typeof(eventTriggers[eventType]) == 'undefined') {
                                 Homey.log('Eventtype not supported');
                                 callback('Eventtype not supported', false);
                             }
+
+                            var imdbBaseUrl = 'http://www.imdb.com/title/';
+
+                            utils.getMediaInfo(instanceData, 'movie', args.body.Movie.Id).then(function(response) {
+                                var result = {
+                                    title: response.title,
+                                    year: response.year,
+                                    overview: '',
+                                    rating: response.ratings.value,
+                                    imdb_url: util.format('%s%s', imdbBaseUrl, response.imdbId),
+                                    image: '',
+                                    imageUrl: null
+                                };
+
+                                if (response.hasOwnProperty('overview')) {
+                                    result.overview = response.overview;
+                                }
+
+                                for (var i = 0; i < response.images.length; i++) {
+
+                                    if (!response.images[i].hasOwnProperty('coverType')
+                                        || response.images[i].coverType != "poster"
+                                    ) {
+                                        continue;
+                                    }
+
+                                    result.imageUrl = response.images[i].url;
+                                }
+
+                                return utils.getImageData(instanceData, result);
+                            }).then(function(result) {
+                                Homey.log(result);
+
+                                Homey.manager('flow').triggerDevice(eventTriggers[eventType], result);
+
+                                callback(null, true);
+                            }).catch(function(err) {
+                                Homey.log(err);
+
+                                callback('Invalid response from Radarr api', false);
+                            });
+                            //
+                            // var title = movie.Title;
+                            // // var year = null,
+                            // //     imdbId = null,
+                            // //     imdbUrl = null;
+                            //
+                            // // if (args.body.RemoteMovie !== 'undefined') {
+                            // //     var remoteMovie = args.body.RemoteMovie;
+                            // //
+                            // //     imdbId = remoteMovie.ImdbId;
+                            // //     year = remoteMovie.Year;
+                            // //
+                            // //     imdbUrl = util.format('%s%s', imdbBaseUrl, imdbId);
+                            // // }
+                            //
+                            // if (eventtype == 'Grab') {
+                            //     Homey.manager('flow').triggerDevice('grab_movie', {title: title});//, year: year, imdbId: imdbId, imdbUrl: imdbUrl});
+                            //     callback(null, true);
+                            // } else if (eventtype == 'Download' || eventtype == 'Test') {
+                            //
+                            //
+                            //
+                            //     Homey.manager('flow').triggerDevice('download_movie', {title: title});//, year: year, imdbId: imdbId, imdbUrl: imdbUrl});
+                            //     callback(null, true);
+                            // } else {
+                            //     Homey.log('Eventtype not supported');
+                            //     callback('Eventtype not supported', false);
+                            // }
                         } else {
                             callback('Invalid response from Radarr', false);
                         }
