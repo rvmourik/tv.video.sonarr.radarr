@@ -379,7 +379,10 @@
 							"en": "image",
 							"nl": "image"
 						},
-						"example": false
+						"example": {
+							"en": "",
+							"nl": ""
+						}
 					},
 					{
 						"name": "overview",
